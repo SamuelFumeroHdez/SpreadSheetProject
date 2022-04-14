@@ -3,10 +3,13 @@ package models;
 import exceptions.ColumnsNumberOutOfAlphabetLengthException;
 import utils.AlphabetToNumber;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpreadSheet {
+public class SpreadSheet implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private static final int COLUMNS_LIMIT = 26;
     private static List<Cell> cellList;

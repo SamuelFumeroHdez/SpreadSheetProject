@@ -1,9 +1,11 @@
 package models;
 
+import java.io.Serializable;
+
 /**
  * Represents a cell into the Spreadsheet
  */
-public class Cell {
+public class Cell implements Serializable {
 
     /**
      * Coordinate where the cell is

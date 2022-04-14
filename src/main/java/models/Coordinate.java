@@ -1,9 +1,12 @@
 package models;
 
+import java.io.Serializable;
+
 /**
  * Represents the coordinate of each cell
+ *
  */
-public class Coordinate {
+public class Coordinate implements Serializable {
 
     /**
      * Row of the cell
