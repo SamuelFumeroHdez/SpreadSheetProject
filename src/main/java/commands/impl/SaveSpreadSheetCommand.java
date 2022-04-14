@@ -7,11 +7,9 @@ import java.io.*;
 
 public class SaveSpreadSheetCommand implements Command {
 
-    SpreadSheet spreadSheet;
-
-
-    public SaveSpreadSheetCommand(SpreadSheet spreadSheet) {
-        this.spreadSheet = spreadSheet;
+    private String filePath;
+    public SaveSpreadSheetCommand(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
@@ -21,8 +19,7 @@ public class SaveSpreadSheetCommand implements Command {
 
     @Override
     public void execute() throws IOException {
-        File file = new File("src/main/resources/spreadsheet");
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
-        objectOutputStream.writeObject(spreadSheet);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath));
+        objectOutputStream.writeObject(SpreadSheet.getSpreadSheet());
     }
 }

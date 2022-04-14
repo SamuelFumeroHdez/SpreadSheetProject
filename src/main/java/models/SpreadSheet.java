@@ -25,6 +25,10 @@ public class SpreadSheet implements Serializable {
 
     }
 
+    public static SpreadSheet getSpreadSheet(){
+        return spreadSheet;
+    }
+
     private SpreadSheet(int rows, int columns) {
         try{
             columnsLength(columns); //Controlar que el numero de columnas es menor que la longitud del alfabeto

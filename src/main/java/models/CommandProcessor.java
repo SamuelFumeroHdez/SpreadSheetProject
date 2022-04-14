@@ -1,8 +1,8 @@
 package models;
 
-import commands.impl.CreateNewSpreadSheetCommand;
-import commands.impl.EditCellCommand;
-import commands.impl.FileCommandReader;
+import commands.impl.*;
+
+import java.io.IOException;
 
 /**
  * Represents the processor of the command writed
@@ -15,15 +15,14 @@ public class CommandProcessor {
     private static final String EDIT_CELL = "E";
     private static final String LOAD_SPREADSHEET_FROM_FILE = "L";
     private static final String SAVE_SPREADSHEET_TO_FILE = "S";
-    private static final String GENERAR_HELP = "S";
+    private static final String GENERAR_HELP = "H";
 
     /**
      * Get the command and choose the correct operation
      * for be executed
      * @param
      */
-    public static void processCommand(String command){
-        System.out.println(command);
+    public static void processCommand(String command) throws IOException, ClassNotFoundException {
         String[] arguments = command.split(" ");
         String commandHead = arguments[0];
 
@@ -34,9 +33,9 @@ public class CommandProcessor {
         }else if(commandHead.equalsIgnoreCase(EDIT_CELL)){
             editCell(command);
         }else if(commandHead.equalsIgnoreCase(LOAD_SPREADSHEET_FROM_FILE)){
-            System.out.println("Loading spreadsheet from file...");
+            loadSpreadSheetFromFile(command);
         }else if(commandHead.equalsIgnoreCase(SAVE_SPREADSHEET_TO_FILE)){
-            System.out.println("Saving spreadsheet to file...");
+            saveSpreadSheetToFile(command);
         }else{
             displayHelp(GENERAR_HELP);
         }
@@ -86,6 +85,23 @@ public class CommandProcessor {
             EditCellCommand editCellCommand = new EditCellCommand(coordinate, value);
             editCellCommand.execute();
         }
+    }
+
+    private static void loadSpreadSheetFromFile(String command) throws IOException, ClassNotFoundException {
+        String[] arguments = command.split(" ");
+        String filePath = arguments[1];
+
+        LoadSpreadSheetCommand loadSpreadSheetCommand = new LoadSpreadSheetCommand(filePath);
+        loadSpreadSheetCommand.execute();
+
+    }
+
+    private static void saveSpreadSheetToFile(String command) throws IOException {
+        String[] arguments = command.split(" ");
+        String filePath = arguments[1];
+
+        SaveSpreadSheetCommand saveSpreadSheetCommand = new SaveSpreadSheetCommand(filePath);
+        saveSpreadSheetCommand.execute();
     }
 
     /**

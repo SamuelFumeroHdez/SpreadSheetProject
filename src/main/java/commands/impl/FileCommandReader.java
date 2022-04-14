@@ -32,7 +32,7 @@ public class FileCommandReader implements Command {
         try{
             String command = bufferedReader.readLine();
             CommandProcessor.processCommand(command);
-        }catch (IOException exception){
+        }catch (IOException | ClassNotFoundException exception){
             System.err.println("I/O Error: " + exception);
         }
         //return null;
