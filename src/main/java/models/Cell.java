@@ -30,6 +30,10 @@ public class Cell implements Serializable {
         this.coordinate = coordinate;
     }
 
+    public Cell() {
+
+    }
+
     /**
      * Getter of the coordinate
      * @return

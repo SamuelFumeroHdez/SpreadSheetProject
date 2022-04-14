@@ -56,6 +56,7 @@ public class CommandProcessor {
         }
     }
 
+
     private static void creatNewSpreadSheet(String command){
         String[] arguments = command.split(" ");
         if(arguments.length != 3){

@@ -33,13 +33,17 @@ public class SpreadSheet implements Serializable {
         try{
             columnsLength(columns); //Controlar que el numero de columnas es menor que la longitud del alfabeto
             cellList = new ArrayList<>();
+            Cell currentCell = null;
             for (int rowCount = 0 ; rowCount < rows ; rowCount++){
                 for (int columnCount = 0 ; columnCount < columns ; columnCount++){
                     char columnAsChar = AlphabetToNumber.numberToChar(columnCount+1);
-                    cellList.add(new Cell(new Coordinate(rowCount+1,columnAsChar)));
+                    currentCell = new Cell(new Coordinate(rowCount+1,columnAsChar));
+                    currentCell.setValue(0.0);
+                    cellList.add(currentCell);
                 }
             }
             lastCell = cellList.get(cellList.size()-1);
+
         }catch (ColumnsNumberOutOfAlphabetLengthException exception){
             System.out.println(exception.getMessage());
         }
@@ -75,15 +79,34 @@ public class SpreadSheet implements Serializable {
                 return cell;
             }
         }
+
         // TODO excepcion no se ha encontrado la celda
         return null;
     }
 
     @Override
     public String toString() {
-        return "SpreadSheet{" +
-                "cellList=" + cellList +
-                ", lastCell=" + lastCell +
-                '}';
+        StringBuilder result = new StringBuilder("");
+        for (int i = 1; i <= AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; i++) {
+            result.append("   " + cellList.get(i).getCoordinate().getColumn() + " ");
+        }
+        result.append("\n");
+        for (int row = 1; row <= lastCell.getCoordinate().getRow() ; row++) {
+            result.append(row);
+            result.append("");
+            result.append("---------------------------------\n");
+
+            for (int column = 1; column < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; column++) {
+
+                Cell celda = getCellByCoordinate(new Coordinate(row, AlphabetToNumber.numberToChar(column)));
+
+                result.append("| " + " " + getCellByCoordinate(new Coordinate(row, AlphabetToNumber.numberToChar(column))).getValue() + " ");
+            }
+            result.append("|\n");
+        }
+        result.append("");
+        result.append("---------------------------------\n");
+
+        return String.valueOf(result);
     }
 }
