@@ -5,5 +5,5 @@ import java.io.IOException;
 
 public interface Command {
     void readArguments();
-    void execute() throws IOException;
+    void execute() throws IOException, ClassNotFoundException;
 }
