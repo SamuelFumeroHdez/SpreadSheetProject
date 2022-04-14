@@ -21,7 +21,7 @@ public class CreateNewSpreadSheetCommand implements Command {
 
     @Override
     public void execute() {
-        SpreadSheet spreadSheet = new SpreadSheet(rows, columns);
+        SpreadSheet spreadSheet = SpreadSheet.getSpreadsheet(rows, columns);
         System.out.println(spreadSheet);
     }
 }

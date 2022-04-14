@@ -25,6 +25,6 @@ public class LoadSpreadSheetCommand implements Command {
         File file = new File(filePath);
         ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath));
         SpreadSheet spreadSheet = (SpreadSheet) objectInputStream.readObject();
-        System.out.println(spreadSheet.toString());
+        System.out.println("Spreadsheet desde fichero: " + spreadSheet.toString());
     }
 }

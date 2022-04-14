@@ -14,8 +14,18 @@ public class SpreadSheet implements Serializable {
     private static final int COLUMNS_LIMIT = 26;
     private static List<Cell> cellList;
     private Cell lastCell;
+    private static SpreadSheet spreadSheet;
 
-    public SpreadSheet(int rows, int columns) {
+    public static SpreadSheet getSpreadsheet(int rows, int columns){
+        if(spreadSheet == null){
+            spreadSheet = new SpreadSheet(rows, columns);
+            return spreadSheet;
+        }
+        return spreadSheet;
+
+    }
+
+    private SpreadSheet(int rows, int columns) {
         try{
             columnsLength(columns); //Controlar que el numero de columnas es menor que la longitud del alfabeto
             cellList = new ArrayList<>();

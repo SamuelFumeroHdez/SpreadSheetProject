@@ -10,15 +10,13 @@ public class Main {
 
         //CommandProcessor.processCommand("RF src/main/resources/comando.txt");
         //CommandProcessor.processCommand("C 4 5");
-        SpreadSheet spreadSheet = new SpreadSheet(3,3);
+        SpreadSheet spreadSheet = SpreadSheet.getSpreadsheet(3,3);
 
         SaveSpreadSheetCommand saveSpreadSheetCommand = new SaveSpreadSheetCommand(spreadSheet);
         saveSpreadSheetCommand.execute();
 
         LoadSpreadSheetCommand loadSpreadSheetCommand = new LoadSpreadSheetCommand("src/main/resources/spreadsheet");
         loadSpreadSheetCommand.execute();
-
-
 
     }
 }
