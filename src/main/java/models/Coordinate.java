@@ -9,23 +9,23 @@ import java.io.Serializable;
 public class Coordinate implements Serializable {
 
     /**
-     * Row of the cell
-     */
-    private int row;
-
-    /**
      * Column of the cell
      */
     private char column;
+
+    /**
+     * Row of the cell
+     */
+    private int row;
 
     /**
      * Constructor of the class Coordinate
      * @param row
      * @param column
      */
-    public Coordinate(int row, char column) {
-        this.row = row;
+    public Coordinate(char column, int row) {
         this.column = column;
+        this.row = row;
     }
 
     /**

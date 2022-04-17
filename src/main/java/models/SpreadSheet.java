@@ -37,7 +37,7 @@ public class SpreadSheet implements Serializable {
             for (int rowCount = 0 ; rowCount < rows ; rowCount++){
                 for (int columnCount = 0 ; columnCount < columns ; columnCount++){
                     char columnAsChar = AlphabetToNumber.numberToChar(columnCount+1);
-                    currentCell = new Cell(new Coordinate(rowCount+1,columnAsChar));
+                    currentCell = new Cell(new Coordinate(columnAsChar, rowCount+1));
                     currentCell.setValue(0.0);
                     cellList.add(currentCell);
                 }

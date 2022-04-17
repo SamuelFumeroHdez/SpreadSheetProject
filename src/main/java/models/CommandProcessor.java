@@ -79,7 +79,7 @@ public class CommandProcessor {
             int row = Integer.parseInt(arguments[1]);
             char column = arguments[2].charAt(0);
 
-            Coordinate coordinate = new Coordinate(row, column);
+            Coordinate coordinate = new Coordinate(column, row);
 
             String value = arguments[3];
 
