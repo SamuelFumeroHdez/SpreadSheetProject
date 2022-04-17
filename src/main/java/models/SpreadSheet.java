@@ -98,9 +98,9 @@ public class SpreadSheet implements Serializable {
 
             for (int column = 1; column < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; column++) {
 
-                Cell celda = getCellByCoordinate(new Coordinate(row, AlphabetToNumber.numberToChar(column)));
+                Cell celda = getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column), row));
 
-                result.append("| " + " " + getCellByCoordinate(new Coordinate(row, AlphabetToNumber.numberToChar(column))).getValue() + " ");
+                result.append("| " + " " + getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column), row)).getValue() + " ");
             }
             result.append("|\n");
         }
