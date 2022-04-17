@@ -28,6 +28,7 @@ public class Coordinate implements Serializable {
         this.row = row;
     }
 
+
     /**
      * Getter of the row
      * @return row

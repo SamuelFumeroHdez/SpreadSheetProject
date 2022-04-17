@@ -4,6 +4,7 @@ import exceptions.ColumnsNumberOutOfAlphabetLengthException;
 import utils.AlphabetToNumber;
 
 import java.io.Serializable;
+import java.security.AlgorithmParameterGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,10 +85,41 @@ public class SpreadSheet implements Serializable {
         return null;
     }
 
+    public void agregarFilas(int numeroFilas){
+
+        int baseRow = lastCell.getCoordinate().getRow();
+        Cell currentCell = null;
+        for(int rows = 0 ; rows<numeroFilas ; rows++){
+            for (int columns = 0 ; columns < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; columns++){
+                currentCell = new Cell(new Coordinate(AlphabetToNumber.numberToChar((columns+1)),baseRow+rows+1));
+                currentCell.setValue(0.0);
+                cellList.add(currentCell);
+            }
+        }
+        lastCell = cellList.get(cellList.size()-1);
+        System.out.println(cellList);
+
+    }
+
+    public void agregarColumnas(int numeroColumnas){
+        int baseColumn = AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn());
+
+        Cell currentCell = null;
+        for(int rows = 0 ; rows<lastCell.getCoordinate().getRow() ; rows++){
+            for (int columns = 0 ; columns < numeroColumnas  ; columns++){
+                currentCell = new Cell(new Coordinate(AlphabetToNumber.numberToChar((baseColumn+columns+1)),rows+1));
+                currentCell.setValue(0.0);
+                cellList.add(currentCell);
+            }
+        }
+        lastCell = cellList.get(cellList.size()-1);
+        System.out.println(cellList);
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("");
-        for (int i = 1; i <= AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; i++) {
+        for (int i = 0; i < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; i++) {
             result.append("   " + cellList.get(i).getCoordinate().getColumn() + " ");
         }
         result.append("\n");
@@ -96,11 +128,11 @@ public class SpreadSheet implements Serializable {
             result.append("");
             result.append("---------------------------------\n");
 
-            for (int column = 1; column < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; column++) {
+            for (int column = 0; column < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; column++) {
 
-                Cell celda = getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column), row));
-
-                result.append("| " + " " + getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column), row)).getValue() + " ");
+                Cell celda = getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column+1), row));
+                System.out.println(celda);
+                result.append("| " + " " + getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column+1), row)).getValue() + " ");
             }
             result.append("|\n");
         }
