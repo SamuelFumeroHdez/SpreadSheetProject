@@ -2,7 +2,9 @@ package models;
 
 public class Operand {
 
-    private OperandType type;
+    private double finalValue;
+
+    private final OperandType type;
 
     public Operand(OperandType type) {
         this.type = type;
@@ -12,7 +14,4 @@ public class Operand {
         return type;
     }
 
-    public void setType(OperandType type) {
-        this.type = type;
-    }
 }

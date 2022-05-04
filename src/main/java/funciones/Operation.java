@@ -1,8 +1,12 @@
 package funciones;
 
+import models.Operand;
+
+import java.util.List;
+
 public interface Operation {
 
-    void processContent(String operation);
+    void processContent(List<Operand> operandsList);
     void execute();
     double returnResult();
 

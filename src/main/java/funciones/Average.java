@@ -1,8 +1,12 @@
 package funciones;
 
-public class Average implements Operation{
+import models.Operand;
+
+import java.util.List;
+
+public class Average extends Function{
     @Override
-    public void processContent(String operation) {
+    public void processContent(List<Operand> operandsList) {
 
     }
 

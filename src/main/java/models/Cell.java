@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Represents a cell into the Spreadsheet
  */
-public class Cell implements Serializable {
+public class Cell extends Operand implements Serializable {
 
     /**
      * Coordinate where the cell is
@@ -22,18 +22,17 @@ public class Cell implements Serializable {
      */
     private String formula;
 
-    private final OperandType type = OperandType.CELL;
-
     /**
      * Constructor of the Cell class
      * @param coordinate
      */
     public Cell(Coordinate coordinate) {
+        super(OperandType.CELL);
         this.coordinate = coordinate;
     }
 
     public Cell() {
-
+        super(OperandType.CELL);
     }
 
     /**

@@ -1,8 +1,13 @@
 package funciones;
 
-public class Sum implements Operation {
+import models.Operand;
+
+import java.util.List;
+
+public class Sum extends Function{
+
     @Override
-    public void processContent(String operation) {
+    public void processContent(List<Operand> operandsList) {
 
     }
 
