@@ -22,6 +22,8 @@ public class Cell implements Serializable {
      */
     private String formula;
 
+    private final OperandType type = OperandType.CELL;
+
     /**
      * Constructor of the Cell class
      * @param coordinate
