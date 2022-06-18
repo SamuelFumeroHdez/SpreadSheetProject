@@ -1,14 +1,16 @@
 package models;
 
-import java.lang.reflect.Array;
+import operations.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Calculadora {
     private List<String> operators = Arrays.asList("+", "-", "*", "/");
     private List<String> operandsList = new ArrayList<>();
-    private List<String> operatorsList = new ArrayList<>();
+    private List<Operator> operatorsList = new ArrayList<>();
     private List<String> auxList = new ArrayList<>();
     private List<String> operation = new ArrayList<>();
 
@@ -19,20 +21,23 @@ public class Calculadora {
     }
 
     public void processExpression(){
+        Operator operator;
+        int position = 0;
         for(char token : expression.toCharArray()){
             if(isOperator(token)){
-                operatorsList.add(Character.toString(token));
+                operator = getOperator(Character.toString(token), position);
+                operatorsList.add(operator);
                 addAndClean();
+                position++;
             }else{
                 auxList.add(Character.toString(token));
             }
+
         }
         //auxList.add(Character.toString(expression.charAt(expression.length()-1)));
 
-        String lastOperand = expression.substring(auxList.size()+operatorsList.size());
-        System.out.println(lastOperand);
-        operandsList.add(lastOperand);
-
+        char lastOperand = expression.charAt(expression.length()-1);
+        operandsList.add(String.valueOf(lastOperand));
 
         buildOperation();
     }
@@ -70,21 +75,108 @@ public class Calculadora {
                 int row = Integer.parseInt(Character.toString(s.charAt(1))); // Fila
                 operation.add(String.valueOf(SpreadSheet.getCellByCoordinate(new Coordinate(column,row))));
             }
-            System.out.println(operatorsList + " " + count);
-
-            operation.add(operatorsList.get(count));
-            System.out.println(operation);
-            count++;
-
+            if(count<operandsList.size()-1){
+                operation.add(operatorsList.get(count).getValue());
+                count++;
+            }
         }
 
     }
+
+    public void sortOperatos(){
+        for(Operator op : operatorsList){
+            if (op.getpriority()==1){
+                int right = operatorsList.indexOf(op);
+                int left = right-1;
+                if(right!=0){
+                    while (left>=0){
+                        if(operatorsList.get(left).getpriority()>1){
+                            swap(operatorsList, left, right);
+                        }
+                        left--;
+                        right--;
+                    }
+                }
+            }
+        }
+    }
+
+    private void swap(List<Operator> operatorsList, int left, int right){
+        Operator aux = new Operator(operatorsList.get(left).getpriority(), operatorsList.get(left).getValue(), operatorsList.get(left).getOriginalPosition());
+
+        operatorsList.get(left).setValue(operatorsList.get(right).getValue());
+        operatorsList.get(left).setpriority(operatorsList.get(right).getpriority());
+        operatorsList.get(left).setOriginalPosition(operatorsList.get(right).getOriginalPosition());
+
+        operatorsList.get(right).setValue(aux.getValue());
+        operatorsList.get(right).setpriority(aux.getpriority());
+        operatorsList.get(right).setOriginalPosition(aux.getOriginalPosition());
+
+    }
+    public void execute(){
+        System.out.println(operandsList);
+        System.out.println(operatorsList);
+
+        List<String> resultList = operandsList;
+        List<Operation> operationList = new ArrayList<>();
+        Operation operation = null;
+
+        for(Operator operator : operatorsList){
+            operation = getOperation(operator, operandsList.get(operator.getOriginalPosition()),
+                    operandsList.get(operator.getOriginalPosition()+1));
+            operationList.add(operation);
+        }
+
+        int pos;
+        String rightValue;
+        String leftValue;
+        Double result;
+        for(Operator operator : operatorsList){
+            pos = operator.getOriginalPosition()+1;
+            rightValue = operandsList.get(pos);
+            leftValue = operandsList.get(pos-1);
+            Operation operation1 = getOperation(operator, rightValue, leftValue);
+            for(ListIterator iterator = resultList.listIterator() ; iterator.hasNext(); ){
+                if(iterator.nextIndex() == pos+1){
+                    iterator.set(null);
+                }
+                iterator.next();
+            }
+            System.out.println(operation1.getResult());
+            System.out.println(resultList);
+        }
+
+    }
+
+    private Operator getOperator(String token, int position){
+        if(token.equals("+") || token.equals("-")){
+            return new Operator(2,token, position);
+        }else if(token.equals("*") || token.equals("/")){
+            return new Operator(1,token, position);
+        }
+        return null;
+    }
+
 
     private boolean isNumeric(String s){
         return s.chars().allMatch( Character::isDigit );
     }
 
-    public List<String> getOperation() {
-        return operation;
+    public Operation getOperation(Operator operator, String firstOperand, String secondOperand) {
+
+        if(operator.getValue().equals("+")){
+            return new Sum(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+        }else if(operator.getValue().equals("-")){
+            return new Substract(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+        }else if(operator.getValue().equals("*")){
+            return new Product(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+        }else if(operator.getValue().equals("/")){
+            return new Division(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+        }
+        return null;
+    }
+
+    public List<Operator> getOperatorsList(){
+        return this.operatorsList;
     }
 }

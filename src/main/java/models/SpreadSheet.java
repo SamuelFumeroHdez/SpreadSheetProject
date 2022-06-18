@@ -97,7 +97,7 @@ public class SpreadSheet implements Serializable {
             }
         }
         lastCell = cellList.get(cellList.size()-1);
-        System.out.println(cellList);
+
 
     }
 
@@ -113,8 +113,10 @@ public class SpreadSheet implements Serializable {
             }
         }
         lastCell = cellList.get(cellList.size()-1);
-        System.out.println(cellList);
+
     }
+
+
 
     @Override
     public String toString() {
