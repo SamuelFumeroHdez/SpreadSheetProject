@@ -1,7 +1,7 @@
 package commands.impl;
 
 import commands.Command;
-import models.CommandProcessor;
+import models.Controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -31,7 +31,7 @@ public class FileCommandReader implements Command {
     public void execute(){
         try{
             String command = bufferedReader.readLine();
-            CommandProcessor.processCommand(command);
+            Controller.processCommand(command);
         }catch (IOException | ClassNotFoundException exception){
             System.err.println("I/O Error: " + exception);
         }

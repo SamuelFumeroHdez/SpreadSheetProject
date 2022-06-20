@@ -8,7 +8,7 @@ import java.io.IOException;
  * Represents the processor of the command writed
  * by the user.
  */
-public class CommandProcessor {
+public class Controller {
 
     private static final String READ_COMMAND_FROM_FILE = "RF";
     private static final String CREATE_NEW_SPREADSHEET = "C";
@@ -16,6 +16,7 @@ public class CommandProcessor {
     private static final String LOAD_SPREADSHEET_FROM_FILE = "L";
     private static final String SAVE_SPREADSHEET_TO_FILE = "S";
     private static final String GENERAR_HELP = "H";
+    private static final String QUIT = "Q";
 
     /**
      * Get the command and choose the correct operation
@@ -36,6 +37,8 @@ public class CommandProcessor {
             loadSpreadSheetFromFile(command);
         }else if(commandHead.equalsIgnoreCase(SAVE_SPREADSHEET_TO_FILE)){
             saveSpreadSheetToFile(command);
+        }else if(commandHead.equalsIgnoreCase(QUIT)){
+
         }else{
             displayHelp(GENERAR_HELP);
         }
