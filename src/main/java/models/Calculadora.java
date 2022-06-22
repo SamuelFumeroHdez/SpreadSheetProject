@@ -130,20 +130,36 @@ public class Calculadora {
         int pos;
         String rightValue;
         String leftValue;
-        Double result;
+        Double result = 0.0;
         for(Operator operator : operatorsList){
             pos = operator.getOriginalPosition()+1;
+            System.out.println("Posicion " + pos);
             rightValue = operandsList.get(pos);
             leftValue = operandsList.get(pos-1);
-            Operation operation1 = getOperation(operator, rightValue, leftValue);
+            System.out.println("right " + operandsList.get(pos));
+            System.out.println("left " + operandsList.get(pos-1));
+            Operation operation1;
+            if(rightValue == null){
+                operation1 = getOperation(operator, Double.toString(result),rightValue);
+            }else{
+                operation1 = getOperation(operator, rightValue, leftValue);
+            }
+
+            result += operation1.getResult();
+            System.out.println("La operacion actual es -> " + operation1.toString());
+            System.out.println("La pos actual es -> " + pos);
             for(ListIterator iterator = resultList.listIterator() ; iterator.hasNext(); ){
-                if(iterator.nextIndex() == pos+1){
+
+                if(iterator.nextIndex() == pos){
+                    System.out.println("Se ha encontrado la posicion a hacer nulo de la op " + operation1.toString());
+                    System.out.println("Voy a hacer nulo la posicion " + pos);
                     iterator.set(null);
                 }
                 iterator.next();
+
             }
-            System.out.println(operation1.getResult());
-            System.out.println(resultList);
+            System.out.println(operation1.toString());
+            System.out.println("asdf " + resultList);
         }
 
     }

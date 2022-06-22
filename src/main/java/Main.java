@@ -9,14 +9,14 @@ public class Main {
         Controller.processCommand("C 4 5");
         SpreadSheet spreadSheet = SpreadSheet.getSpreadSheet();
 
-        Calculadora calculadora = new Calculadora("31+5*4-3+4*9");
+        Calculadora calculadora = new Calculadora("31+6*4-3+4*9");
         calculadora.processExpression();
         calculadora.sortOperatos();
-        //calculadora.execute();
+        calculadora.execute();
 
         UserInterface userInterface = new UserInterface();
 
-        userInterface.printMenu();
+//        userInterface.printMenu();
 
 
 //        Parser parser = new Parser("src/main/resources/spreadSheet.csv");
