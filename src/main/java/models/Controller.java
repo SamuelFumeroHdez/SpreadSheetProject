@@ -74,17 +74,21 @@ public class Controller {
     }
 
     private static void editCell(String command){
+        System.out.println(command);
         String[] arguments = command.split(" ");
-        if(arguments.length != 4){
+
+        if(arguments.length != 3){
             displayHelp(EDIT_CELL);
         }else{
 
-            int row = Integer.parseInt(arguments[1]);
-            char column = arguments[2].charAt(0);
+            int row = Integer.parseInt(String.valueOf(arguments[1].charAt(1)));
+            char column = arguments[1].charAt(0);
+            System.out.println("fila " + row);
+            System.out.println("columna " + column);
 
             Coordinate coordinate = new Coordinate(column, row);
 
-            String value = arguments[3];
+            String value = arguments[2];
 
             EditCellCommand editCellCommand = new EditCellCommand(coordinate, value);
             editCellCommand.execute();

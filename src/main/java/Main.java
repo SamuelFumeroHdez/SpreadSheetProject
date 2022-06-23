@@ -9,15 +9,18 @@ public class Main {
         Controller.processCommand("C 4 5");
         SpreadSheet spreadSheet = SpreadSheet.getSpreadSheet();
 
-        Calculadora calculadora = new Calculadora("31+6*4-3+4*9");
-        calculadora.processExpression();
-        calculadora.sortOperatos();
-        calculadora.execute();
+        Controller.processCommand("E A1 9-3+2*2-6/6+8");
+
+        System.out.println(spreadSheet);
+
+//        Calculadora calculadora = new Calculadora("9-3+2*2-6/6+8");
+//        calculadora.processExpression();
+//        calculadora.sortOperatos();
+//        System.out.println("Resultado -> " + calculadora.execute());
 
         UserInterface userInterface = new UserInterface();
 
 //        userInterface.printMenu();
-
 
 //        Parser parser = new Parser("src/main/resources/spreadSheet.csv");
 //        SpreadSheet spreadSheet1 = parser.loadSpreadSheetS2V();

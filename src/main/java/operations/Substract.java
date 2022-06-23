@@ -17,6 +17,6 @@ public class Substract extends Operation{
 
     @Override
     public double getResult() {
-        return firstOp * secondOp;
+        return firstOp - secondOp;
     }
 }

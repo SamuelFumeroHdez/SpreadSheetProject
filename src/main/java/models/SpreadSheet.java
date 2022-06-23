@@ -120,9 +120,13 @@ public class SpreadSheet implements Serializable {
 
     @Override
     public String toString() {
+        System.out.println("IMPRIMIENDO");
+        System.out.println(AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()));
+        System.out.println(lastCell.getCoordinate().getRow());
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; i++) {
             result.append("   " + cellList.get(i).getCoordinate().getColumn() + " ");
+
         }
         result.append("\n");
         for (int row = 1; row <= lastCell.getCoordinate().getRow() ; row++) {
@@ -133,7 +137,7 @@ public class SpreadSheet implements Serializable {
             for (int column = 0; column < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; column++) {
 
                 Cell celda = getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column+1), row));
-                System.out.println(celda);
+
                 result.append("| " + " " + getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column+1), row)).getValue() + " ");
             }
             result.append("|\n");

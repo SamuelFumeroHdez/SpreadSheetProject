@@ -113,7 +113,7 @@ public class Calculadora {
         operatorsList.get(right).setOriginalPosition(aux.getOriginalPosition());
 
     }
-    public void execute(){
+    public String execute(){
         System.out.println(operandsList);
         System.out.println(operatorsList);
 
@@ -126,42 +126,30 @@ public class Calculadora {
                     operandsList.get(operator.getOriginalPosition()+1));
             operationList.add(operation);
         }
-
         int pos;
         String rightValue;
         String leftValue;
         Double result = 0.0;
+
         for(Operator operator : operatorsList){
             pos = operator.getOriginalPosition()+1;
-            System.out.println("Posicion " + pos);
             rightValue = operandsList.get(pos);
-            leftValue = operandsList.get(pos-1);
-            System.out.println("right " + operandsList.get(pos));
-            System.out.println("left " + operandsList.get(pos-1));
-            Operation operation1;
-            if(rightValue == null){
-                operation1 = getOperation(operator, Double.toString(result),rightValue);
-            }else{
-                operation1 = getOperation(operator, rightValue, leftValue);
-            }
 
-            result += operation1.getResult();
-            System.out.println("La operacion actual es -> " + operation1.toString());
-            System.out.println("La pos actual es -> " + pos);
-            for(ListIterator iterator = resultList.listIterator() ; iterator.hasNext(); ){
+            int leftPos = assignLeftOperand(pos);
+            leftValue = resultList.get(assignLeftOperand(pos));
+            Operation operation1 = getOperation(operator, leftValue, rightValue);
 
-                if(iterator.nextIndex() == pos){
-                    System.out.println("Se ha encontrado la posicion a hacer nulo de la op " + operation1.toString());
-                    System.out.println("Voy a hacer nulo la posicion " + pos);
-                    iterator.set(null);
-                }
-                iterator.next();
-
-            }
-            System.out.println(operation1.toString());
-            System.out.println("asdf " + resultList);
+            resultList.set(pos, null);
+            resultList.set(leftPos, String.valueOf(operation1.getResult()));
         }
+        return resultList.get(0);
+    }
 
+    private int assignLeftOperand(int pos){
+        while(operandsList.get(pos-1)==null){
+            pos--;
+        }
+        return pos-1;
     }
 
     private Operator getOperator(String token, int position){

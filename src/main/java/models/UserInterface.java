@@ -24,7 +24,7 @@ public class UserInterface {
         stringBuilder.append("\n");
 
         stringBuilder.append("Edit cell            ");
-        stringBuilder.append("E <Coordinate>");
+        stringBuilder.append("E <Coordinate> <New value>");
 
         stringBuilder.append("\n");
 

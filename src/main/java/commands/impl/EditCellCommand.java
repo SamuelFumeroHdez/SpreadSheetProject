@@ -1,6 +1,7 @@
 package commands.impl;
 
 import commands.Command;
+import models.Calculadora;
 import models.Cell;
 import models.Coordinate;
 import models.SpreadSheet;
@@ -24,7 +25,10 @@ public class EditCellCommand implements Command {
     public void execute() {
 
         Cell cell = SpreadSheet.getCellByCoordinate(coordinate);
-        cell.setValue(Double.parseDouble(newValue));
+        Calculadora calculadora = new Calculadora(newValue);
+        calculadora.processExpression();
+        calculadora.sortOperatos();
+        cell.setValue(Double.parseDouble(calculadora.execute()));
 
     }
 }
