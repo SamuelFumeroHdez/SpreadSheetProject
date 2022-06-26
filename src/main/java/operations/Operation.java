@@ -1,12 +1,14 @@
 package operations;
 
+import models.Operand;
+
 public abstract class Operation {
 
-    protected double firstOp;
-    protected double secondOp;
-    protected double priority;
+    protected Operand firstOp;
+    protected Operand secondOp;
+    protected Integer priority;
 
-    public Operation(double firstOp, double secondOp) {
+    public Operation(Operand firstOp, Operand secondOp) {
         this.firstOp = firstOp;
         this.secondOp = secondOp;
     }
@@ -14,6 +16,6 @@ public abstract class Operation {
     @Override
     public abstract String toString();
 
-    public abstract double getResult();
+    public abstract Integer getResult();
 
 }

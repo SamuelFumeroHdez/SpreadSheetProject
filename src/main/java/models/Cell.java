@@ -15,7 +15,7 @@ public class Cell /*extends Operand*/{
     /**
      * Value of the cell
      */
-    private Double value;
+    private Integer value;
 
     /**
      * Formula that the cell have
@@ -55,7 +55,7 @@ public class Cell /*extends Operand*/{
      * Getter of the value
      * @return
      */
-    public Double getValue() {
+    public Integer getValue() {
         return value;
     }
 
@@ -63,7 +63,7 @@ public class Cell /*extends Operand*/{
      * Setter of the value
      * @param value
      */
-    public void setValue(Double value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 

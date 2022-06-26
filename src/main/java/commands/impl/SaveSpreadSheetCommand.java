@@ -1,6 +1,7 @@
 package commands.impl;
 
 import commands.Command;
+import models.Parser;
 import models.SpreadSheet;
 
 import java.io.*;
@@ -19,7 +20,7 @@ public class SaveSpreadSheetCommand implements Command {
 
     @Override
     public void execute() throws IOException {
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filePath));
-        objectOutputStream.writeObject(SpreadSheet.getSpreadSheet());
+        Parser parser = new Parser(filePath);
+        parser.saveSpreadSheetS2V();
     }
 }

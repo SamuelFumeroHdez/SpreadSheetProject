@@ -10,8 +10,8 @@ public class UserInterface {
 
     public UserInterface(){
         stringBuilder = new StringBuilder("Operations: \n");
-        stringBuilder.append("Read file            ");
 
+        stringBuilder.append("Read file            ");
         stringBuilder.append("RF <File path>");
         stringBuilder.append("\n");
 
@@ -27,16 +27,6 @@ public class UserInterface {
         stringBuilder.append("E <Coordinate> <New value>");
         stringBuilder.append("\n");
 
-
-        stringBuilder.append("Load SpreedSheet     ");
-        stringBuilder.append("L");
-        stringBuilder.append("\n");
-
-        stringBuilder.append("Save SpreedSheet     ");
-        stringBuilder.append("S");
-        stringBuilder.append("\n");
-
-
         stringBuilder.append("Add Rows             ");
         stringBuilder.append("AR <Rows number>");
         stringBuilder.append("\n");
@@ -51,7 +41,14 @@ public class UserInterface {
 
         stringBuilder.append("Remove Column        ");
         stringBuilder.append("RC");
+        stringBuilder.append("\n");
 
+        stringBuilder.append("Load Spreadsheet      ");
+        stringBuilder.append("L <Path>");
+        stringBuilder.append("\n");
+
+        stringBuilder.append("Save Spreadsheet      ");
+        stringBuilder.append("S <Path>");
         stringBuilder.append("\n");
 
         stringBuilder.append("> Insert option: ");
@@ -66,7 +63,7 @@ public class UserInterface {
         if(!option.equalsIgnoreCase("Q")){
             printMenu();
         }else{
-            System.out.println("Adios muy buenassss");
+            System.out.println("Coming out...");
         }
     }
 

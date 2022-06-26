@@ -1,7 +1,9 @@
 package operations;
 
+import models.Operand;
+
 public class Product extends Operation{
-    public Product(double firstOp, double secondOp) {
+    public Product(Operand firstOp, Operand secondOp) {
         super(firstOp, secondOp);
         this.priority = 1;
     }
@@ -16,7 +18,7 @@ public class Product extends Operation{
     }
 
     @Override
-    public double getResult() {
-        return firstOp * secondOp;
+    public Integer getResult() {
+        return firstOp.getFinalValue() * secondOp.getFinalValue();
     }
 }

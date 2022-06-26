@@ -89,7 +89,7 @@ public class Controller {
     }
 
     private static void editCell(String command){
-        System.out.println(command);
+        System.out.println("Comando: " + command);
         String[] arguments = command.split(" ");
 
         if(arguments.length != 3){

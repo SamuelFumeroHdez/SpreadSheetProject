@@ -16,7 +16,7 @@ public class Min extends Function{
     }
 
     @Override
-    public double returnResult() {
+    public Integer returnResult() {
         return 0;
     }
 }

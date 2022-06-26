@@ -27,6 +27,10 @@ public class SpreadSheet implements Serializable {
     }
 
     public static SpreadSheet getSpreadSheet(){
+        if(spreadSheet == null){
+            spreadSheet = new SpreadSheet(1, 1);
+            return spreadSheet;
+        }
         return spreadSheet;
     }
 
@@ -39,7 +43,7 @@ public class SpreadSheet implements Serializable {
                 for (int columnCount = 0 ; columnCount < columns ; columnCount++){
                     char columnAsChar = AlphabetToNumber.numberToChar(columnCount+1);
                     currentCell = new Cell(new Coordinate(columnAsChar, rowCount+1));
-                    currentCell.setValue(0.0);
+                    currentCell.setValue(0);
                     cellList.add(currentCell);
                 }
             }
@@ -92,7 +96,7 @@ public class SpreadSheet implements Serializable {
         for(int rows = 0 ; rows<rowsNumber ; rows++){
             for (int columns = 0 ; columns < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; columns++){
                 currentCell = new Cell(new Coordinate(AlphabetToNumber.numberToChar((columns+1)),baseRow+rows+1));
-                currentCell.setValue(0.0);
+                currentCell.setValue(0);
                 cellList.add(currentCell);
             }
         }
@@ -100,17 +104,16 @@ public class SpreadSheet implements Serializable {
     }
 
 
-
     public void addColumns(int columnsNumber){
         int baseColumn = AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn());
-
         Cell currentCell = null;
         for(int rows = 0 ; rows<lastCell.getCoordinate().getRow() ; rows++){
             for (int columns = 0 ; columns < columnsNumber  ; columns++){
                 currentCell = new Cell(new Coordinate(AlphabetToNumber.numberToChar((baseColumn+columns+1)),rows+1));
-                currentCell.setValue(0.0);
+                currentCell.setValue(0);
                 cellList.add(currentCell);
             }
+
         }
         lastCell = cellList.get(cellList.size()-1);
 
@@ -120,20 +123,22 @@ public class SpreadSheet implements Serializable {
 
     @Override
     public String toString() {
-        System.out.println("IMPRIMIENDO");
-        System.out.println(AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()));
-        System.out.println(lastCell.getCoordinate().getRow());
         StringBuilder result = new StringBuilder("");
-        for (int i = 0; i < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; i++) {
-            result.append("   " + cellList.get(i).getCoordinate().getColumn() + " ");
+
+        for (int i = 1; i < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn())+1 ; i++) {
+            result.append("  " + AlphabetToNumber.numberToChar(i) + "   ");
 
         }
+
         result.append("\n");
         for (int row = 1; row <= lastCell.getCoordinate().getRow() ; row++) {
             result.append(row);
             result.append("");
-            result.append("---------------------------------\n");
 
+            for(int i=0 ; i<5*AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; i++){
+                result.append("-");
+            }
+            result.append("\n");
             for (int column = 0; column < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; column++) {
 
                 Cell celda = getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(column+1), row));
@@ -143,7 +148,7 @@ public class SpreadSheet implements Serializable {
             result.append("|\n");
         }
         result.append("");
-        result.append("---------------------------------\n");
+
 
         return String.valueOf(result);
     }

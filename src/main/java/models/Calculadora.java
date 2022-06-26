@@ -9,7 +9,7 @@ import java.util.ListIterator;
 
 public class Calculadora {
     private List<String> operators = Arrays.asList("+", "-", "*", "/");
-    private List<String> operandsList = new ArrayList<>();
+    private List<Integer> operandsList = new ArrayList<>();
     private List<Operator> operatorsList = new ArrayList<>();
     private List<String> auxList = new ArrayList<>();
     private List<String> operation = new ArrayList<>();
@@ -36,8 +36,9 @@ public class Calculadora {
         }
         //auxList.add(Character.toString(expression.charAt(expression.length()-1)));
 
-        char lastOperand = expression.charAt(expression.length()-1);
-        operandsList.add(String.valueOf(lastOperand));
+        char lastOperandChar = expression.charAt(expression.length()-1);
+        Operand lastOperand = new Operand(String.valueOf(lastOperandChar));
+        operandsList.add(lastOperand.getFinalValue());
 
         buildOperation();
     }
@@ -56,25 +57,23 @@ public class Calculadora {
         for(String s : auxList){
             result += s;
         }
-        operandsList.add(result);
+
+        operandsList.add(new Operand(result).getFinalValue());
         auxList.clear();
     }
 
-    /**
-     * ¡¡¡IMPORTANTE!!! Se debe refactorizar para que el añadir el ultimo valor sea responsabildiad del algoritmo
-     * que cosntruye la operacion
-     */
     public void buildOperation(){
         int count = 0;
-        for(String s : operandsList){
-            if(isNumeric(s)){
-                operation.add(s);
-            }else{
-                //Tener en cuenta que las celdas pueden ser de mas de dos caracteres
-                char column = s.charAt(0); // Columna
-                int row = Integer.parseInt(Character.toString(s.charAt(1))); // Fila
-                operation.add(String.valueOf(SpreadSheet.getCellByCoordinate(new Coordinate(column,row))));
-            }
+        for(Integer op : operandsList){
+            System.out.println("Operand: " + op);
+            operation.add(String.valueOf(op));
+//            if(isNumeric(op.getValue())){
+//                operation.add(s);
+//            }else{
+//                char column = s.charAt(0); // Columna
+//                int row = Integer.parseInt(Character.toString(s.charAt(1))); // Fila
+//                operation.add(String.valueOf(SpreadSheet.getCellByCoordinate(new Coordinate(column,row))));
+//            }
             if(count<operandsList.size()-1){
                 operation.add(operatorsList.get(count).getValue());
                 count++;
@@ -113,23 +112,23 @@ public class Calculadora {
         operatorsList.get(right).setOriginalPosition(aux.getOriginalPosition());
 
     }
-    public String execute(){
+    public Integer execute(){
         System.out.println(operandsList);
         System.out.println(operatorsList);
 
-        List<String> resultList = operandsList;
+        List<Integer> resultList = operandsList;
         List<Operation> operationList = new ArrayList<>();
         Operation operation = null;
 
         for(Operator operator : operatorsList){
-            operation = getOperation(operator, operandsList.get(operator.getOriginalPosition()),
-                    operandsList.get(operator.getOriginalPosition()+1));
+            operation = getOperation(operator, new Operand(String.valueOf(operandsList.get(operator.getOriginalPosition()))),
+                    new Operand(String.valueOf(operandsList.get(operator.getOriginalPosition()+1))));
             operationList.add(operation);
         }
         int pos;
-        String rightValue;
-        String leftValue;
-        Double result = 0.0;
+        Integer rightValue;
+        Integer leftValue;
+        Integer result = 0;
 
         for(Operator operator : operatorsList){
             pos = operator.getOriginalPosition()+1;
@@ -137,10 +136,10 @@ public class Calculadora {
 
             int leftPos = assignLeftOperand(pos);
             leftValue = resultList.get(assignLeftOperand(pos));
-            Operation operation1 = getOperation(operator, leftValue, rightValue);
+            Operation operation1 = getOperation(operator, new Operand(String.valueOf(leftValue)), new Operand(String.valueOf(rightValue)));
 
             resultList.set(pos, null);
-            resultList.set(leftPos, String.valueOf(operation1.getResult()));
+            resultList.set(leftPos, operation1.getResult());
         }
         return resultList.get(0);
     }
@@ -166,16 +165,16 @@ public class Calculadora {
         return s.chars().allMatch( Character::isDigit );
     }
 
-    public Operation getOperation(Operator operator, String firstOperand, String secondOperand) {
+    public Operation getOperation(Operator operator, Operand firstOperand, Operand secondOperand) {
 
         if(operator.getValue().equals("+")){
-            return new Sum(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+            return new Sum(firstOperand, secondOperand);
         }else if(operator.getValue().equals("-")){
-            return new Substract(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+            return new Substract(firstOperand, secondOperand);
         }else if(operator.getValue().equals("*")){
-            return new Product(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+            return new Product(firstOperand, secondOperand);
         }else if(operator.getValue().equals("/")){
-            return new Division(Double.parseDouble(firstOperand), Double.parseDouble(secondOperand));
+            return new Division(firstOperand, secondOperand);
         }
         return null;
     }

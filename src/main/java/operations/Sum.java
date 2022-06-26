@@ -1,9 +1,11 @@
 package operations;
 
+import models.Operand;
+
 public class Sum extends Operation{
 
 
-    public Sum(double firstOp, double secondOp) {
+    public Sum(Operand firstOp, Operand secondOp) {
         super(firstOp, secondOp);
         this.priority = 2;
     }
@@ -18,7 +20,7 @@ public class Sum extends Operation{
     }
 
     @Override
-    public double getResult() {
-        return firstOp + secondOp;
+    public Integer getResult() {
+        return firstOp.getFinalValue() + secondOp.getFinalValue();
     }
 }

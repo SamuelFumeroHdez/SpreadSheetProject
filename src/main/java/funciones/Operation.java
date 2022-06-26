@@ -8,6 +8,6 @@ public interface Operation {
 
     void processContent(List<Operand> operandsList);
     void execute();
-    double returnResult();
+    Integer returnResult();
 
 }

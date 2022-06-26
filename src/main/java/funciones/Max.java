@@ -17,7 +17,7 @@ public class Max extends Function{
     }
 
     @Override
-    public double returnResult() {
+    public Integer returnResult() {
         return 0;
     }
 }

@@ -60,16 +60,15 @@ public class Parser {
 
             Cell lastCell = new Cell(new Coordinate(lastCoordinate.charAt(0), Character.getNumericValue(lastCoordinate.charAt(1)))); //??
 
-            SpreadSheet spreadSheet = SpreadSheet.getSpreadSheet();
-            spreadSheet.setLastCell(lastCell);
-
             int columns = AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn());
             int rows = lastCell.getCoordinate().getRow();
+
+            SpreadSheet spreadSheet = SpreadSheet.getSpreadsheet(rows, columns);
 
             int counter = 0;
             for(int i=1 ; i<=columns ; i++){
                 for(int j=1 ; j<=rows ; j++){
-                    SpreadSheet.getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(i), j)).setValue(Double.parseDouble(values[counter]));
+                    SpreadSheet.getCellByCoordinate(new Coordinate(AlphabetToNumber.numberToChar(i), j)).setValue(Integer.parseInt(values[counter]));
                     counter++;
                 }
             }

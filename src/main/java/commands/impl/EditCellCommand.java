@@ -28,7 +28,7 @@ public class EditCellCommand implements Command {
         Calculadora calculadora = new Calculadora(newValue);
         calculadora.processExpression();
         calculadora.sortOperatos();
-        cell.setValue(Double.parseDouble(calculadora.execute()));
+        cell.setValue(Integer.parseInt(String.valueOf(calculadora.execute())));
 
     }
 }

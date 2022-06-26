@@ -1,6 +1,7 @@
 package commands.impl;
 
 import commands.Command;
+import models.Parser;
 import models.SpreadSheet;
 
 import java.io.*;
@@ -22,9 +23,7 @@ public class LoadSpreadSheetCommand implements Command {
     @Override
     public void execute() throws IOException, ClassNotFoundException {
 
-        File file = new File(filePath);
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filePath));
-        SpreadSheet spreadSheet = (SpreadSheet) objectInputStream.readObject();
-        System.out.println("Spreadsheet desde fichero: " + spreadSheet.toString());
+        Parser parser = new Parser(filePath);
+        parser.loadSpreadSheetS2V();
     }
 }

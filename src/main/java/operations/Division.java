@@ -1,8 +1,10 @@
 package operations;
 
+import models.Operand;
+
 public class Division extends Operation{
 
-    public Division(double firstOp, double secondOp) {
+    public Division(Operand firstOp, Operand secondOp) {
         super(firstOp, secondOp);
         this.priority = 1;
     }
@@ -17,8 +19,8 @@ public class Division extends Operation{
     }
 
     @Override
-    public double getResult() {
-        assert(super.secondOp != 0.0);
-        return firstOp / secondOp;
+    public Integer getResult() {
+        assert(super.secondOp.getFinalValue() != 0.0);
+        return firstOp.getFinalValue() / secondOp.getFinalValue();
     }
 }

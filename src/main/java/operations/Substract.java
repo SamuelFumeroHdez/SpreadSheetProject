@@ -1,7 +1,9 @@
 package operations;
 
+import models.Operand;
+
 public class Substract extends Operation{
-    public Substract(double firstOp, double secondOp) {
+    public Substract(Operand firstOp, Operand secondOp) {
         super(firstOp, secondOp);
         this.priority = 2;
     }
@@ -16,7 +18,7 @@ public class Substract extends Operation{
     }
 
     @Override
-    public double getResult() {
-        return firstOp - secondOp;
+    public Integer getResult() {
+        return firstOp.getFinalValue() - secondOp.getFinalValue();
     }
 }
