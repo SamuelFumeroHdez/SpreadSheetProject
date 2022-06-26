@@ -1,5 +1,6 @@
 package models;
 
+import commands.Command;
 import commands.impl.*;
 
 import java.io.IOException;
@@ -12,9 +13,12 @@ public class Controller {
 
     private static final String READ_COMMAND_FROM_FILE = "RF";
     private static final String CREATE_NEW_SPREADSHEET = "C";
+    private static final String PRINT_SPREADSHEET = "P";
     private static final String EDIT_CELL = "E";
     private static final String LOAD_SPREADSHEET_FROM_FILE = "L";
     private static final String SAVE_SPREADSHEET_TO_FILE = "S";
+    private static final String ADD_ROWS = "AR";
+    private static final String ADD_COLUMNS = "AC";
     private static final String GENERAR_HELP = "H";
     private static final String QUIT = "Q";
 
@@ -31,12 +35,18 @@ public class Controller {
             readCommandFromFile(command);
         }else if (commandHead.equalsIgnoreCase(CREATE_NEW_SPREADSHEET)){
             creatNewSpreadSheet(command);
+        }else if(commandHead.equalsIgnoreCase(PRINT_SPREADSHEET)) {
+            printSpreadSheet();
         }else if(commandHead.equalsIgnoreCase(EDIT_CELL)){
             editCell(command);
         }else if(commandHead.equalsIgnoreCase(LOAD_SPREADSHEET_FROM_FILE)){
             loadSpreadSheetFromFile(command);
         }else if(commandHead.equalsIgnoreCase(SAVE_SPREADSHEET_TO_FILE)){
             saveSpreadSheetToFile(command);
+        }else if(commandHead.equalsIgnoreCase(ADD_ROWS)){
+            addRows(command);
+        }else if(commandHead.equalsIgnoreCase(ADD_COLUMNS)){
+            addColumns(command);
         }else if(commandHead.equalsIgnoreCase(QUIT)){
 
         }else{
@@ -71,6 +81,11 @@ public class Controller {
             CreateNewSpreadSheetCommand createNewSpreadSheetCommand = new CreateNewSpreadSheetCommand(rows, columns);
             createNewSpreadSheetCommand.execute();
         }
+    }
+
+    private static void printSpreadSheet() throws IOException, ClassNotFoundException {
+        PrintSpreadSheetCommand printSpreadSheetCommand = new PrintSpreadSheetCommand();
+        printSpreadSheetCommand.execute();
     }
 
     private static void editCell(String command){
@@ -111,6 +126,36 @@ public class Controller {
         SaveSpreadSheetCommand saveSpreadSheetCommand = new SaveSpreadSheetCommand(filePath);
         saveSpreadSheetCommand.execute();
     }
+
+    private static void addRows(String command) throws IOException, ClassNotFoundException {
+        String[] arguments = command.split(" ");
+
+        if(arguments.length != 2){
+            displayHelp(ADD_ROWS);
+        }else{
+
+            int rowsNumber = Integer.parseInt(arguments[1]);
+
+            Command addRowsCommand = new AddRowsCommand(rowsNumber);
+            addRowsCommand.execute();
+        }
+    }
+
+    private static void addColumns(String command) throws IOException, ClassNotFoundException {
+        String[] arguments = command.split(" ");
+
+        if(arguments.length != 2){
+            displayHelp(ADD_COLUMNS);
+        }else{
+
+            int columnsNumber = Integer.parseInt(arguments[1]);
+
+            Command addColumnsCommand = new AddColumnsCommand(columnsNumber);
+            addColumnsCommand.execute();
+        }
+    }
+
+
 
     /**
      * Method for display the user help when user send a wrong input

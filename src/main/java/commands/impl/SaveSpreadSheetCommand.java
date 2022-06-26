@@ -7,7 +7,7 @@ import java.io.*;
 
 public class SaveSpreadSheetCommand implements Command {
 
-    private String filePath;
+    private final String filePath;
     public SaveSpreadSheetCommand(String filePath) {
         this.filePath = filePath;
     }

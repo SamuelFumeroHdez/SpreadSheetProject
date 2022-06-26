@@ -7,7 +7,7 @@ import java.io.*;
 
 public class LoadSpreadSheetCommand implements Command {
 
-    private String filePath;
+    private final String filePath;
 
 
     public LoadSpreadSheetCommand(String filePath) {

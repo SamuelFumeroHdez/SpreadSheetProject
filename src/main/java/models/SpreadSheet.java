@@ -85,11 +85,11 @@ public class SpreadSheet implements Serializable {
         return null;
     }
 
-    public void agregarFilas(int numeroFilas){
+    public void addRows(int rowsNumber){
 
         int baseRow = lastCell.getCoordinate().getRow();
         Cell currentCell = null;
-        for(int rows = 0 ; rows<numeroFilas ; rows++){
+        for(int rows = 0 ; rows<rowsNumber ; rows++){
             for (int columns = 0 ; columns < AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn()) ; columns++){
                 currentCell = new Cell(new Coordinate(AlphabetToNumber.numberToChar((columns+1)),baseRow+rows+1));
                 currentCell.setValue(0.0);
@@ -97,16 +97,16 @@ public class SpreadSheet implements Serializable {
             }
         }
         lastCell = cellList.get(cellList.size()-1);
-
-
     }
 
-    public void agregarColumnas(int numeroColumnas){
+
+
+    public void addColumns(int columnsNumber){
         int baseColumn = AlphabetToNumber.charToNumber(lastCell.getCoordinate().getColumn());
 
         Cell currentCell = null;
         for(int rows = 0 ; rows<lastCell.getCoordinate().getRow() ; rows++){
-            for (int columns = 0 ; columns < numeroColumnas  ; columns++){
+            for (int columns = 0 ; columns < columnsNumber  ; columns++){
                 currentCell = new Cell(new Coordinate(AlphabetToNumber.numberToChar((baseColumn+columns+1)),rows+1));
                 currentCell.setValue(0.0);
                 cellList.add(currentCell);

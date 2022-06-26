@@ -8,8 +8,8 @@ import models.SpreadSheet;
 
 public class EditCellCommand implements Command {
 
-    Coordinate coordinate;
-    String newValue;
+    private final Coordinate coordinate;
+    private final String newValue;
 
     public EditCellCommand(Coordinate coordinate, String newValue) {
         this.coordinate = coordinate;

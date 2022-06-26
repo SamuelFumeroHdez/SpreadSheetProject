@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    private static String separator = "            ";
     private StringBuilder stringBuilder;
     private String option;
 
@@ -14,49 +13,40 @@ public class UserInterface {
         stringBuilder.append("Read file            ");
 
         stringBuilder.append("RF <File path>");
-
         stringBuilder.append("\n");
 
         stringBuilder.append("Create Spreadsheet   ");
-        stringBuilder.append("C");
+        stringBuilder.append("C <rows> <columns>");
+        stringBuilder.append("\n");
 
-
+        stringBuilder.append("Print Spreadsheet    ");
+        stringBuilder.append("P");
         stringBuilder.append("\n");
 
         stringBuilder.append("Edit cell            ");
         stringBuilder.append("E <Coordinate> <New value>");
-
         stringBuilder.append("\n");
 
 
         stringBuilder.append("Load SpreedSheet     ");
         stringBuilder.append("L");
-
-
         stringBuilder.append("\n");
 
         stringBuilder.append("Save SpreedSheet     ");
         stringBuilder.append("S");
-
         stringBuilder.append("\n");
 
 
-        stringBuilder.append("Add Row              ");
-        stringBuilder.append("AR");
-
-
+        stringBuilder.append("Add Rows             ");
+        stringBuilder.append("AR <Rows number>");
         stringBuilder.append("\n");
 
         stringBuilder.append("Remove Row           ");
         stringBuilder.append("RR");
-
         stringBuilder.append("\n");
 
-
-        stringBuilder.append("Add Column           ");
-        stringBuilder.append("AC");
-
-
+        stringBuilder.append("Add Columns          ");
+        stringBuilder.append("AC <Columns number>");
         stringBuilder.append("\n");
 
         stringBuilder.append("Remove Column        ");
@@ -80,16 +70,6 @@ public class UserInterface {
         }
     }
 
-
-
-
-
-//    Read commands from File (RF)
-//2. Create a New Spreadsheet (command C)
-//3. Edit a cell (command E)
-//4. Load a Spreadsheet from a file (command L)
-//5. Save the Spreadsheet to a file (command S)
-//    After executing each command, the program shall
 
 
 }

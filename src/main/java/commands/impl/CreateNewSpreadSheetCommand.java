@@ -5,8 +5,8 @@ import models.SpreadSheet;
 
 public class CreateNewSpreadSheetCommand implements Command {
 
-    int rows;
-    int columns;
+    private final int rows;
+    private final int columns;
 
 
     public CreateNewSpreadSheetCommand(int rows, int columns) {
